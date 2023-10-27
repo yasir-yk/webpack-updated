@@ -10,6 +10,7 @@ module.exports = {
     filename: 'js/main.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: ''
+
   },
   mode: 'production',
   devtool: 'eval-cheap-module-source-map',
@@ -36,18 +37,23 @@ module.exports = {
       },
        
       {
-        test: /\.(png|svg|jpe?g|gif)$/i,
+        test: /\.(png|svg|jpe?g|gif)$/i, 
+        //type: 'asset/resource',
+        generator: {
+          // adding a hash to the file
+          filename: '../../images/[name][ext]',
+        },
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath: './images/',
-              publicPath:'./images/',
-              emitFile: false,
+              name: '[name][ext]',
+              outputPath: 'images',
+              publicPath:'images',
+              emitFile: true,
               esModule: false
 
-            },
+            }
           },
           {
             loader: 'image-webpack-loader',
